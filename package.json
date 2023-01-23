@@ -1,0 +1,29 @@
+{
+  "name": "api-rest-sql",
+  "version": "1.0.0",
+  "description": "API REST with SQL queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZManak/api-rest-sql.git"
+  },
+  "author": "ZManak",
+  "license": "ISC",
+    "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.7",
+    "pg": "^8.8.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "bugs": {
+    "url": "https://github.com/ZManak/api-rest-sql/issues"
+  },
+  "homepage": "https://github.com/ZManak/api-rest-sql#readme"
+}
