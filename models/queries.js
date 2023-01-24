@@ -8,12 +8,13 @@ const queries = {
     ORDER BY id_entry ASC;
     `,
     updateEntry:`
-    UPDATE entries AS e 
-    SET e.title = $1, e.content = $2, e.category = $3
-    WHERE e.title=$4`,
+    UPDATE entries
+    SET content = $1, category = $2
+    WHERE title = $3;`,
     deleteEntry:`
-    DELETE FROM entries AS e
-    WHERE e.title=$1`,
+    DELETE 
+    FROM entries
+    WHERE title = $1;`,
     createEntry: 
     `INSERT INTO entries(title,content,id_author,category) 
     VALUES ($1,$2,

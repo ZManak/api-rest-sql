@@ -23,21 +23,6 @@ pool.connect((err, client, release) => {
     })
 })
 
-// GET
-const getEntriesByEmail = async (email) => {
-    let client, result;
-    try {
-        client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.getEntriesByEmail, [email])
-        result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
 
 // GET
 const getEntries = async () => {
@@ -55,12 +40,11 @@ const getEntries = async () => {
     return result
 }
 
-// CREATE
 const createEntry = async (entry) => {
     const { title, content, email, category } = entry;
     let client, result;
     try {
-        client = await pool.connect(); // Espera a abrir conexion
+        client = await pool.connect();
         const data = await client.query(queries.createEntry,[title, content, email, category])
         result = data.rowCount
     } catch (err) {
@@ -72,12 +56,11 @@ const createEntry = async (entry) => {
     return result
 }
 
-
 // DELETE 
 const delEntry = async (entry) =>{
     let client, result;
     try {
-        client = await pool.connect(); // Espera a abrir conexion
+        client = await pool.connect();
         const data = await client.query(queries.delEntry,[entry])
         result = data.rowCount
     } catch (err) {
@@ -92,11 +75,11 @@ const delEntry = async (entry) =>{
 
 //UPDATE
 const updateEntry = async (entry) => {
-    const { title, content, category, id } = entry
+    const { content, category, title } = entry
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.updateEntry,[title, content, category, id])
+        const data = await client.query(queries.updateEntry,[content, category, title])
         result = data.rows
     } catch (err) {
         console.log(err);
@@ -108,11 +91,10 @@ const updateEntry = async (entry) => {
 }
 
 const entries = {
-    getEntriesByEmail,
     getEntries,
-    createEntry,
     delEntry,
-    updateEntry
+    updateEntry,
+    createEntry
 }
 
 module.exports = entries;

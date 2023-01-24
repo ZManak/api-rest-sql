@@ -26,7 +26,7 @@ app.use(morgan('combined'));
 //Rutas 
 app.use('/api/entries',entriesApiRoutes); // Rutas API entries
 //app.use(error404); // Middleware Para ruta no encontrada (404)
-console.log(DB_PWD)
+
 app.listen(port, () => {
     console.log(`Server up on port ${port}`)
 })
