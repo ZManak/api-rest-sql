@@ -1,0 +1,11 @@
+const express = require('express');
+
+const entriesApiController = require("../controllers/entriesApiController.js");
+const entriesApiRoutes = express.Router();
+
+entriesApiRoutes.get('/', entriesApiController.getEntries);
+/* entriesApiRoutes.post('/', entriesApiController.createEntry);
+entriesApiRoutes.put('/', entriesApiController.updateEntry);
+entriesApiRoutes.delete('/', entriesApiController.delEntry) */
+
+module.exports = entriesApiRoutes;
