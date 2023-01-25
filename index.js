@@ -1,10 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const morgan = require('morgan')
+const morgan = require('morgan');
 const DB_PWD = process.env.DB_PWD;
 
 // Módulos de Rutas
 const entriesApiRoutes = require('./routes/entriesApiRoutes')
+const authorsApiRoutes = require('./routes/authApiRoutes');
 
 const app = express()
 const port = 3000
@@ -24,8 +25,8 @@ app.use(morgan('combined'));
 }) */
 
 //Rutas 
-app.use('/api/entries',entriesApiRoutes); // Rutas API entries
-//app.use(error404); // Middleware Para ruta no encontrada (404)
+app.use('/api/entries', entriesApiRoutes); 
+app.use('/api/authors', authorsApiRoutes);
 
 app.listen(port, () => {
     console.log(`Server up on port ${port}`)

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const entriesApiController = require("../controllers/entriesApiController.js");
+const entriesApiController = require("../controllers/apiControllers.js");
 const entriesApiRoutes = express.Router();
 
 entriesApiRoutes.post('/', entriesApiController.createEntry);

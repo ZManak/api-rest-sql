@@ -1,100 +1,24 @@
-require('dotenv').config()
-const { Pool } = require('pg');
-const queries = require('./queries')
-const DB_PWD = process.env.DB_PWD
-
-const pool = new Pool({
-    host: '127.0.0.1',
-    user: 'zmanak',
-    database: 'postgres',
-    password: DB_PWD
-})
-
-pool.connect((err, client, release) => {
-    if (err) {
-      return console.error('Error acquiring client', err.stack)
-    }
-    client.query('SELECT NOW()', (err, result) => {
-      release()
-      if (err) {
-        return console.error('Error executing query', err.stack)
-      }
-      console.log(result.rows)
-    })
-})
-
-
-// GET
-const getEntries = async () => {
-    let client, result;
-    try {
-        client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.getEntries)
-        result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
+const queries = {
+    getEntries: `
+    SELECT e.title, e.content, e.dated, e.category, 
+    a.name,a.surname,a.image  
+    FROM entries AS e
+    INNER JOIN authors AS a
+    ON e.id_author=a.id_author
+    ORDER BY id_entry ASC;
+    `,
+    updateEntry:`
+    UPDATE entries
+    SET content = $1, category = $2
+    WHERE title = $3;`,
+    deleteEntry:`
+    DELETE 
+    FROM entries
+    WHERE title = $1;`,
+    createEntry:  
+    `INSERT INTO entries(title,content,id_author,category) 
+    VALUES ($1,$2,
+    (SELECT id_author FROM authors WHERE email=$3),$4)`
 }
 
-const createEntry = async (entry) => {
-    const { title, content, email, category } = entry;
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(queries.createEntry,[title, content, email, category])
-        result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-// DELETE 
-const delEntry = async (entry) =>{
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(queries.delEntry,[entry])
-        result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-
-//UPDATE
-const updateEntry = async (entry) => {
-    const { content, category, title } = entry
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(queries.updateEntry,[content, category, title])
-        result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-const entries = {
-    getEntries,
-    delEntry,
-    updateEntry,
-    createEntry
-}
-
-module.exports = entries;
+module.exports = queries;
