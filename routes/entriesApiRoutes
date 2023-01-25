@@ -7,5 +7,10 @@ entriesApiRoutes.post('/', entriesApiController.createEntry);
 entriesApiRoutes.get('/', entriesApiController.getEntries);
 entriesApiRoutes.put('/', entriesApiController.updateEntry);
 entriesApiRoutes.delete('/', entriesApiController.delEntry);
-
+entriesApiRoutes.delete('/hola', entriesApiController.delEntry);
+/* //entriesApiRoutes.delete('/hola', function (req, res) {
+    console.log(req.body);
+    res.send('Hola');
+});
+ */
 module.exports = entriesApiRoutes;

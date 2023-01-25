@@ -7,6 +7,6 @@ authorsApiRoutes.post('/', entriesApiController.createAuthor);
 authorsApiRoutes.get('/', entriesApiController.getAuthors);
 authorsApiRoutes.get('/:email?', entriesApiController.getByEmail);
 authorsApiRoutes.put('/', entriesApiController.updateAuthor);
-//authorsApiRoutes.delete('/', entriesApiController.delEntry);
+authorsApiRoutes.delete('/', entriesApiController.deleteAuthor);
 
 module.exports = authorsApiRoutes;

@@ -22,7 +22,7 @@ const updateEntry = async (req, res) => {
     })
 }
 
-const delEntry = async (res, req) => {
+const delEntry = async (req, res) => {
     const {title}  = req.body;
     const response = await entry.delEntry(title);
     res.status(200).json({
@@ -60,6 +60,15 @@ const updateAuthor = async (req, res) => {
     });
 }
 
+const deleteAuthor = async (res, req) => {
+    const {delEmail}  = req.body;
+    const response = await entry.delEntry(delEmail);
+    res.status(200).json({
+        DELETE: response,
+        data: delEmail
+    })
+}
+
 module.exports = {
     getEntries,
     createEntry,
@@ -68,5 +77,6 @@ module.exports = {
     getAuthors,
     getByEmail,
     createAuthor,
-    updateAuthor
+    updateAuthor,
+    deleteAuthor
 }

@@ -13,6 +13,10 @@ const authors = {
     UPDATE authors
     SET name = $1, surname = $2, email = $3, image = $4
     WHERE id_author = $5;`,
+    deleteAuthor:`
+    DELETE 
+    FROM authors
+    WHERE email = $1;`
 }
 
 module.exports = authors;

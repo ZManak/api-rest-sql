@@ -62,7 +62,7 @@ const delEntry = async (entry) => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.delEntry, [entry])
+        const data = await client.query(queries.deleteEntry, [entry])
         result = data.rowCount
     } catch (err) {
         console.log(err);

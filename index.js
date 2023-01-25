@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan');
+//const error404 = require('404.js')
 const DB_PWD = process.env.DB_PWD;
 
 // Módulos de Rutas
@@ -19,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use(morgan('combined'));
+//app.use('error404')
+
 
 /* app.get('/', (req, res) => {
     res.render('content')
@@ -27,6 +30,7 @@ app.use(morgan('combined'));
 //Rutas 
 app.use('/api/entries', entriesApiRoutes); 
 app.use('/api/authors', authorsApiRoutes);
+
 
 app.listen(port, () => {
     console.log(`Server up on port ${port}`)
