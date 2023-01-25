@@ -1,5 +1,4 @@
 const entry = require('../models/distro');
-const authors = require('../models/authors');
 
 const getEntries = async (req, res) => {
     let entries = await entry.getEntries()
@@ -52,6 +51,15 @@ const createAuthor = async (req, res) => {
     });
 }
 
+const updateAuthor = async (req, res) => {
+    const updatedAuthor = req.body; 
+    const response = await entry.updateAuthor(updatedAuthor);
+    res.status(201).json({
+        items_created: response,
+        data: updatedAuthor
+    });
+}
+
 module.exports = {
     getEntries,
     createEntry,
@@ -59,5 +67,6 @@ module.exports = {
     delEntry, 
     getAuthors,
     getByEmail,
-    createAuthor
+    createAuthor,
+    updateAuthor
 }

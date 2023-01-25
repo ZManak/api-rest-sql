@@ -137,11 +137,11 @@ const createAuthor = async (author) => {
 }
 
 const updateAuthor = async (author) => {
-    const { name, surname, mail, image } = author;
+    const { name, surname, mail, image, id } = author;
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.createEntry, [name, surname, mail, image])
+        const data = await client.query(authors.updateAuthor, [name, surname, mail, image, id])
         result = data.rowCount
     } catch (err) {
         console.log(err);
