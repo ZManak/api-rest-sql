@@ -11,13 +11,6 @@ const getAuthors = async (req, res) => {
     }
 }
 
-const getByEmail = async (req, res) => {
-    const email = req.query.email;
-    console.log(email)
-    const response = await entry.getByEmail(email);
-    res.status(200).json(response)
-}
-
 const createAuthor = async (req, res) => {
     const newAuthor = req.body; 
     const response = await entry.createAuthor(newAuthor);
