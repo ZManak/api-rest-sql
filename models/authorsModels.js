@@ -1,6 +1,8 @@
 require('dotenv').config()
 const { Pool } = require('pg');
 const authors = require('../queries/authors');
+
+
 const DB_PWD = process.env.DB_PWD
 
 const pool = new Pool({
@@ -11,7 +13,7 @@ const pool = new Pool({
 })
 
 
-pool.connect((err, client, release) => {
+/*pool.connect((err, client, release) => {
     if (err) {
       return console.error('Error acquiring client', err.stack)
     }
@@ -22,7 +24,7 @@ pool.connect((err, client, release) => {
       }
       console.log(result.rows)
     })
-})
+}) */
 
 const getAuthors = async () => {
     let client, result;
@@ -40,6 +42,7 @@ const getAuthors = async () => {
 }
 
 const getByEmail = async (author) => {
+    console.log(author);
     let client, result;
     try {
         client = await pool.connect();
@@ -88,12 +91,11 @@ const updateAuthor = async (author) => {
 }
 
 const deleteAuthor = async (entry) =>{
-    const {email} = entry
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(queries.deleteEntry, [email])
-        result = data.rows
+        const data = await client.query(authors.deleteAuthor, [entry])
+        result = data.rowCount
     } catch (err) {
         console.log(err);
         throw err;

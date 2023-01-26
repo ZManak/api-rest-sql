@@ -1,6 +1,7 @@
 require('dotenv').config()
 const { Pool } = require('pg');
 const queries = require('../queries/entries');
+
 const DB_PWD = process.env.DB_PWD
 
 const pool = new Pool({
@@ -10,7 +11,7 @@ const pool = new Pool({
     password: DB_PWD
 })
 
-pool.connect((err, client, release) => {
+/* pool.connect((err, client, release) => {
     if (err) {
         return console.error('Error acquiring client', err.stack)
     }
@@ -22,7 +23,7 @@ pool.connect((err, client, release) => {
         console.log(result.rows)
     })
 })
-
+ */
 // GET
 const getEntries = async () => {
     let client, result;
@@ -56,7 +57,7 @@ const createEntry = async (entry) => {
 }
 
 // DELETE 
-const delEntry = async (entry) => {
+const deleteEntry = async (entry) => {
     let client, result;
     try {
         client = await pool.connect();
@@ -91,7 +92,7 @@ const updateEntry = async (entry) => {
 
 const entries = {
     getEntries,
-    delEntry,
+    deleteEntry,
     updateEntry,
     createEntry
 }

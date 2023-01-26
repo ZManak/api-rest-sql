@@ -6,11 +6,6 @@ const entriesApiRoutes = express.Router();
 entriesApiRoutes.post('/', entriesApiController.createEntry);
 entriesApiRoutes.get('/', entriesApiController.getEntries);
 entriesApiRoutes.put('/', entriesApiController.updateEntry);
-entriesApiRoutes.delete('/', entriesApiController.delEntry);
-entriesApiRoutes.delete('/hola', entriesApiController.delEntry);
-/* //entriesApiRoutes.delete('/hola', function (req, res) {
-    console.log(req.body);
-    res.send('Hola');
-});
- */
+entriesApiRoutes.delete('/', entriesApiController.deleteEntry);
+
 module.exports = entriesApiRoutes;

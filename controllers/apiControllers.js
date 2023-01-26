@@ -23,12 +23,12 @@ const updateEntry = async (req, res) => {
     })
 }
 
-const delEntry = async (req, res) => {
+const deleteEntry = async (req, res) => {
     const {title}  = req.body;
-    const response = await entry.delEntry(title);
+    const response = await entry.deleteEntry(title);
     res.status(200).json({
-        DELETE: response,
-        data: title
+        DELETE: title,
+        data: response
     })
 }
 
@@ -36,5 +36,5 @@ module.exports = {
     getEntries,
     createEntry,
     updateEntry,
-    delEntry
+    deleteEntry
 }

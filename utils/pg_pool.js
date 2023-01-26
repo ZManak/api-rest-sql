@@ -21,3 +21,5 @@ pool.connect((err, client, release) => {
       console.log(result.rows)
     })
 })
+ 
+module.exports = Pool

@@ -6,7 +6,8 @@ const getAuthors = async (req, res) => {
 }
 
 const getByEmail = async (req, res) => {
-    const email = req.query;
+    const email = req.query.email;
+    console.log(email)
     const response = await entry.getByEmail(email);
     res.status(200).json(response)
 }
@@ -29,12 +30,12 @@ const updateAuthor = async (req, res) => {
     });
 }
 
-const deleteAuthor = async (res, req) => {
-    const {delEmail}  = req.body;
-    const response = await entry.deleteAuthor(delEmail);
+const deleteAuthor = async (req, res) => {
+    const {email}  = req.body;
+    const response = await entry.deleteAuthor(email);
     res.status(200).json({
-        DELETE: response,
-        data: delEmail
+        DELETE: email,
+        data: response
     })
 }
 

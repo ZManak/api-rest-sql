@@ -5,7 +5,7 @@ const authorsApiRoutes = express.Router();
 
 authorsApiRoutes.post('/', authorApiController.createAuthor);
 authorsApiRoutes.get('/', authorApiController.getAuthors);
-authorsApiRoutes.get('/:email?', authorApiController.getByEmail);
+authorsApiRoutes.get('/prueba', authorApiController.getByEmail);
 authorsApiRoutes.put('/', authorApiController.updateAuthor);
 authorsApiRoutes.delete('/', authorApiController.deleteAuthor);
 
