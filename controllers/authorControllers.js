@@ -1,8 +1,14 @@
 const entry = require('../models/authorsModels');
 
 const getAuthors = async (req, res) => {
-    let authors = await entry.getAuthors();
-    res.status(200).json(authors);
+    if (req.query.email) {
+        let email = req.query.email
+        let author = await entry.getByEmail(email);
+        res.status(200).json(author);
+    } else {
+        let authors = await entry.getAuthors();
+        res.status(200).json(authors);
+    }
 }
 
 const getByEmail = async (req, res) => {
@@ -39,10 +45,19 @@ const deleteAuthor = async (req, res) => {
     })
 }
 
+const deleteAllAuthors = async (req, res) => {
+    const response = await entry.deleteAllAuthors();
+    res.status(200).json({
+        DELETETABLE: "success",
+        data: response 
+    })
+}
+
 module.exports = {
     getAuthors,
     updateAuthor,
     createAuthor,
     deleteAuthor,
-    getByEmail
+    getByEmail,
+    deleteAllAuthors
 }

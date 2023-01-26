@@ -1,4 +1,4 @@
-const queries = {
+const entry_queries = {
     getEntries: `
     SELECT e.title, e.content, e.dated, e.category, 
     a.name,a.surname,a.image  
@@ -18,7 +18,9 @@ const queries = {
     createEntry:  
     `INSERT INTO entries(title,content,id_author,category) 
     VALUES ($1,$2,
-    (SELECT id_author FROM authors WHERE email=$3),$4)`
+    (SELECT id_author FROM authors WHERE email=$3),$4)`,
+    deleteAllEntries:`
+    DROP TABLE entries;`
 }
 
-module.exports = queries;
+module.exports = entry_queries;
