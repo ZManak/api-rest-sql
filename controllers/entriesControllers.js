@@ -32,9 +32,19 @@ const deleteEntry = async (req, res) => {
     })
 }
 
+const deleteAllEntries = async () => {
+    const response = await entry.deleteAllEntries();
+    res.status(200).json({
+        DELETETABLE: "success",
+        data: response
+    })
+}
+
+
 module.exports = {
     getEntries,
     createEntry,
     updateEntry,
-    deleteEntry
+    deleteEntry, 
+    deleteAllEntries    
 }

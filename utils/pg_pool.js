@@ -22,4 +22,4 @@ pool.connect((err, client, release) => {
     })
 })
  
-module.exports = Pool
+module.exports = pool

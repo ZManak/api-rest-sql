@@ -1,4 +1,4 @@
-const authors = {
+const authors_queries = {
     getAuthors: `
     SELECT *
     FROM authors;`,
@@ -16,7 +16,10 @@ const authors = {
     deleteAuthor:`
     DELETE 
     FROM authors
-    WHERE email = $1;`
+    WHERE email = $1;`,
+    deleteAllAuthors:`
+    DROP TABLE authors;
+    `
 }
 
-module.exports = authors;
+module.exports = authors_queries;
