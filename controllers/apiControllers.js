@@ -16,9 +16,10 @@ const createEntry = async (req, res) => {
 
 const updateEntry = async (req, res) => {
     const upEntry = req.body;
+    const response = await entry.updateEntry(upEntry)
     res.status(202).json({ 
-        UPDATE: "success",
-        data: upEntry
+        UPDATE: response,
+        data: title
     })
 }
 
