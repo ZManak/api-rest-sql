@@ -16,24 +16,35 @@ const createEntry = async (req, res) => {
 
 const updateEntry = async (req, res) => {
     const upEntry = req.body;
+    const response = await entry.updateEntry(upEntry)
     res.status(202).json({ 
-        UPDATE: "success",
-        data: upEntry
-    })
-}
-
-const delEntry = async (req, res) => {
-    const {title}  = req.body;
-    const response = await entry.delEntry(title);
-    res.status(200).json({
-        DELETE: response,
+        UPDATE: response,
         data: title
     })
 }
+
+const deleteEntry = async (req, res) => {
+    const {title}  = req.body;
+    const response = await entry.deleteEntry(title);
+    res.status(200).json({
+        DELETE: title,
+        data: response
+    })
+}
+
+const deleteAllEntries = async () => {
+    const response = await entry.deleteAllEntries();
+    res.status(200).json({
+        DELETETABLE: "success",
+        data: response
+    })
+}
+
 
 module.exports = {
     getEntries,
     createEntry,
     updateEntry,
-    delEntry
+    deleteEntry, 
+    deleteAllEntries    
 }

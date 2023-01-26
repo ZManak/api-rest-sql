@@ -1,14 +1,14 @@
 const entry = require('../models/authorsModels');
 
 const getAuthors = async (req, res) => {
-    let authors = await entry.getAuthors();
-    res.status(200).json(authors);
-}
-
-const getByEmail = async (req, res) => {
-    const email = req.query;
-    const response = await entry.getByEmail(email);
-    res.status(200).json(response)
+    if (req.query.email) {
+        let email = req.query.email
+        let author = await entry.getByEmail(email);
+        res.status(200).json(author);
+    } else {
+        let authors = await entry.getAuthors();
+        res.status(200).json(authors);
+    }
 }
 
 const createAuthor = async (req, res) => {
@@ -29,12 +29,20 @@ const updateAuthor = async (req, res) => {
     });
 }
 
-const deleteAuthor = async (res, req) => {
-    const {delEmail}  = req.body;
-    const response = await entry.deleteAuthor(delEmail);
+const deleteAuthor = async (req, res) => {
+    const {email}  = req.body;
+    const response = await entry.deleteAuthor(email);
     res.status(200).json({
-        DELETE: response,
-        data: delEmail
+        DELETE: email,
+        data: response
+    })
+}
+
+const deleteAllAuthors = async (req, res) => {
+    const response = await entry.deleteAllAuthors();
+    res.status(200).json({
+        DELETETABLE: "success",
+        data: response 
     })
 }
 
@@ -43,5 +51,6 @@ module.exports = {
     updateAuthor,
     createAuthor,
     deleteAuthor,
-    getByEmail
+    getByEmail,
+    deleteAllAuthors
 }
