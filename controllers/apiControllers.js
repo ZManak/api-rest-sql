@@ -1,4 +1,4 @@
-const entry = require('../models/distro');
+const entry = require('../models/entriesModels');
 
 const getEntries = async (req, res) => {
     let entries = await entry.getEntries()
@@ -31,52 +31,9 @@ const delEntry = async (req, res) => {
     })
 }
 
-const getAuthors = async (req, res) => {
-    let authors = await entry.getAuthors();
-    res.status(200).json(authors);
-}
-
-const getByEmail = async (req, res) => {
-    const email = req.query;
-    const response = await entry.getByEmail(email);
-    res.status(200).json(response)
-}
-
-const createAuthor = async (req, res) => {
-    const newAuthor = req.body; 
-    const response = await entry.createAuthor(newAuthor);
-    res.status(201).json({
-        items_created: response,
-        data: newAuthor
-    });
-}
-
-const updateAuthor = async (req, res) => {
-    const updatedAuthor = req.body; 
-    const response = await entry.updateAuthor(updatedAuthor);
-    res.status(201).json({
-        items_created: response,
-        data: updatedAuthor
-    });
-}
-
-const deleteAuthor = async (res, req) => {
-    const {delEmail}  = req.body;
-    const response = await entry.delEntry(delEmail);
-    res.status(200).json({
-        DELETE: response,
-        data: delEmail
-    })
-}
-
 module.exports = {
     getEntries,
     createEntry,
     updateEntry,
-    delEntry, 
-    getAuthors,
-    getByEmail,
-    createAuthor,
-    updateAuthor,
-    deleteAuthor
+    delEntry
 }

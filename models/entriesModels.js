@@ -1,7 +1,6 @@
 require('dotenv').config()
 const { Pool } = require('pg');
-const queries = require('./entries');
-const authors = require('./authors');
+const queries = require('../queries/entries');
 const DB_PWD = process.env.DB_PWD
 
 const pool = new Pool({
@@ -23,7 +22,6 @@ pool.connect((err, client, release) => {
         console.log(result.rows)
     })
 })
-
 
 // GET
 const getEntries = async () => {
@@ -90,77 +88,12 @@ const updateEntry = async (entry) => {
     return result
 }
 
-const getAuthors = async () => {
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(authors.getAuthors)
-        result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-const getByEmail = async (author) => {
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(authors.getByEmail, [author])
-        result = data.rows
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-const createAuthor = async (author) => {
-    const { name, surname, mail, image } = author;
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(authors.createAuthor, [name, surname, mail, image])
-        result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
-
-const updateAuthor = async (author) => {
-    const { name, surname, mail, image, id } = author;
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(authors.updateAuthor, [name, surname, mail, image, id])
-        result = data.rowCount
-    } catch (err) {
-        console.log(err);
-        throw err;
-    } finally {
-        client.release();
-    }
-    return result
-}
 
 const entries = {
     getEntries,
     delEntry,
     updateEntry,
-    createEntry,
-    getAuthors,
-    getByEmail,
-    createAuthor,
-    updateAuthor
+    createEntry
 }
 
 module.exports = entries;

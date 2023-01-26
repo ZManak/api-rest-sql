@@ -1,12 +1,12 @@
 const express = require('express');
+const authorApiController = require('../controllers/authorControllers')
 
-const entriesApiController = require("../controllers/apiControllers.js");
 const authorsApiRoutes = express.Router();
 
-authorsApiRoutes.post('/', entriesApiController.createAuthor);
-authorsApiRoutes.get('/', entriesApiController.getAuthors);
-authorsApiRoutes.get('/:email?', entriesApiController.getByEmail);
-authorsApiRoutes.put('/', entriesApiController.updateAuthor);
-authorsApiRoutes.delete('/', entriesApiController.deleteAuthor);
+authorsApiRoutes.post('/', authorApiController.createAuthor);
+authorsApiRoutes.get('/', authorApiController.getAuthors);
+authorsApiRoutes.get('/:email?', authorApiController.getByEmail);
+authorsApiRoutes.put('/', authorApiController.updateAuthor);
+authorsApiRoutes.delete('/', authorApiController.deleteAuthor);
 
 module.exports = authorsApiRoutes;
