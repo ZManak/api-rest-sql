@@ -1,7 +1,7 @@
 const entry = require('../models/entriesModels');
 
 const getEntries = async (req, res) => {
-    let entries = await entry.getEntries()
+    let entries = await entry.getEntries();
     res.status(200).json(entries);
 }
 
@@ -20,7 +20,7 @@ const updateEntry = async (req, res) => {
     res.status(202).json({ 
         UPDATE: response,
         data: title
-    })
+    });
 }
 
 const deleteEntry = async (req, res) => {
@@ -29,7 +29,7 @@ const deleteEntry = async (req, res) => {
     res.status(200).json({
         DELETE: title,
         data: response
-    })
+    });
 }
 
 const deleteAllEntries = async () => {
@@ -37,7 +37,7 @@ const deleteAllEntries = async () => {
     res.status(200).json({
         DELETETABLE: "success",
         data: response
-    })
+    });
 }
 
 

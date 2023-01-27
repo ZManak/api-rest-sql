@@ -18,8 +18,7 @@ const authors_queries = {
     FROM authors
     WHERE email = $1;`,
     deleteAllAuthors:`
-    DROP TABLE authors;
-    `
+    DROP TABLE authors;`
 }
 
 module.exports = authors_queries;

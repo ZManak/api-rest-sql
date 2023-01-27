@@ -5,8 +5,7 @@ const entry_queries = {
     FROM entries AS e
     INNER JOIN authors AS a
     ON e.id_author=a.id_author
-    ORDER BY id_entry ASC;
-    `,
+    ORDER BY id_entry ASC;`,
     updateEntry:`
     UPDATE entries
     SET content = $1, category = $2

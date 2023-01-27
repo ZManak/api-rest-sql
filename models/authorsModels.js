@@ -1,5 +1,3 @@
-require('dotenv').config()
-const { Pool } = require('pg');
 const pool = require('../utils/pg_pool')
 const authors = require('../queries/authors.queries');
 
@@ -7,31 +5,29 @@ const getAuthors = async () => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(authors.getAuthors)
-        result = data.rows
+        const data = await client.query(authors.getAuthors);
+        result = data.rows;
     } catch (err) {
         console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 const getByEmail = async (author) => {
-    console.log(author);
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(authors.getByEmail, [author])
-        result = data.rows
+        const data = await client.query(authors.getByEmail, [author]);
+        result = data.rows;
     } catch (err) {
-        console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 const createAuthor = async (author) => {
@@ -39,39 +35,36 @@ const createAuthor = async (author) => {
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(authors.createAuthor, [name, surname, mail, image])
-        result = data.rowCount
+        const data = await client.query(authors.createAuthor, [name, surname, mail, image]);
+        result = data.rowCount;
     } catch (err) {
-        console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 const updateAuthor = async (author) => {
     const { name, surname, email, image, id_author } = author;
     let client, result;
     try {
-        console.log('ok')
         client = await pool.connect();
-        const data = await client.query(authors.updateAuthor, [name, surname, email, image, id_author])
-        result = data.rowCount
+        const data = await client.query(authors.updateAuthor, [name, surname, email, image, id_author]);
+        result = data.rowCount;
     } catch (err) {
-        console.log(err);
         throw err;
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 const deleteAuthor = async (entry) =>{
     let client, result;
     try {
         client = await pool.connect();
-        const data = await client.query(authors.deleteAuthor, [entry])
+        const data = await client.query(authors.deleteAuthor, [entry]);
         result = data.rowCount;
     } catch (err) {
         console.log(err);
@@ -79,8 +72,7 @@ const deleteAuthor = async (entry) =>{
     } finally {
         client.release();
     }
-    return result
-
+    return result;
 }
 
 const deleteAllAuthors = async () => {
@@ -95,7 +87,7 @@ const deleteAllAuthors = async () => {
     } finally {
         client.release();
     }
-    return result
+    return result;
 }
 
 module.exports = {
